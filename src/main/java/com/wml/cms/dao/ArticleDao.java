@@ -2,7 +2,11 @@ package com.wml.cms.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.wml.cms.domain.Article;
+import com.wml.cms.domain.ArticleVO;
+import com.wml.cms.domain.ChooseResult;
 
 /** 
  * @author by WangMaoLin
@@ -19,4 +23,10 @@ public interface ArticleDao {
 	Article select(Integer id);
 	//修改文章审核状态
 	int update(Article article);
+	//查询评选项
+	List<Article> selectChoose();
+	//添加评选结果
+	int addChooseResult(List<ChooseResult> list);
+	//查询结果
+	List<Article> selectChooses();
 }

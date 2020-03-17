@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wml.cms.domain.Article;
+import com.wml.cms.domain.ArticleVO;
 import com.wml.cms.domain.Category;
 import com.wml.cms.domain.Channel;
 import com.wml.cms.domain.Comment;
@@ -93,6 +94,11 @@ public class IndexController {
 		PageInfo<Article> lastArticles = new PageInfo<Article>(list1);
 		model.addAttribute("lastArticles", lastArticles);
 
+		//展示评选
+		List<Article> lc = articleService.selectChooses();
+		PageInfo<Article> lcArticles = new PageInfo<Article>(lc);
+		model.addAttribute("lcArticles", lcArticles);
+		
 		return "index/index";
 
 	}

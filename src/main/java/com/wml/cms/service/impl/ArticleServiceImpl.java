@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.wml.cms.dao.ArticleDao;
 import com.wml.cms.domain.Article;
+import com.wml.cms.domain.ArticleVO;
+import com.wml.cms.domain.ChooseResult;
 import com.wml.cms.service.ArticleService;
 
 /** 
@@ -42,4 +44,26 @@ public class ArticleServiceImpl implements ArticleService{
 		// TODO Auto-generated method stub
 		return articleDao.update(article);
 	}
+
+	
+
+	@Override
+	public List<Article> selectChoose() {
+		// TODO Auto-generated method stub
+		return articleDao.selectChoose();
+	}
+
+	@Override
+	public Boolean addChooseResult(List<ChooseResult> list) {
+		// TODO Auto-generated method stub
+		return articleDao.addChooseResult(list)>0;
+	}
+
+	@Override
+	public List<Article> selectChooses() {
+		// TODO Auto-generated method stub
+		return articleDao.selectChooses();
+	}
+
+	
 }	

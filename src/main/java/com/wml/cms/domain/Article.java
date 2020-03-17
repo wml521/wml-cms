@@ -35,6 +35,8 @@ public class Article implements Serializable {
 	private Channel channel;
 	private Category category;
 	private User user;
+	
+	
 	public Integer getId() {
 		return id;
 	}

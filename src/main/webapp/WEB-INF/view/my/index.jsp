@@ -28,6 +28,7 @@
 					<li class="list-group-item"><a href="#"><font color="red">我的收藏</font></a></li>
 					<li class="list-group-item"><a href="#"><font color="red">我的评论</font></a></li>
 					<li class="list-group-item"><a href="#"><font color="red">个人信息</font></a></li>
+					<li class="list-group-item"><a href="#" data="/my/choose"><font color="red">本月评选</font></a></li>
 				</ul>
 			</div>
 			<!-- 内容显示区 -->

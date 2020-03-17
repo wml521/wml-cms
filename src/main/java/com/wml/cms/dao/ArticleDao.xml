@@ -37,10 +37,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<if test="categoryId!=null">
 				and a.category_id =#{categoryId}
 			</if>
-			 <!-- 显示热点文章-->
+			<!-- 显示热点文章 -->
 			<if test="hot!=null">
-			  and a.hot = #{hot}
-			 </if>
+				and a.hot = #{hot}
+			</if>
 		</where>
 		order by created desc
 	</select>
@@ -82,8 +82,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 
 	<select id="select" resultMap="articleResultMap">
-		select a.*,u.username from cms_article a
-		 left join cms_user u on a.user_id =u.id  where
+		select a.*,u.username from
+		cms_article a
+		left join cms_user u on a.user_id =u.id where
 		a.id =#{id}
 	</select>
 
@@ -98,5 +99,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			</if>
 		</trim>
 	</update>
+
+	<select id="selectChoose" resultMap="articleResultMap">
+		select
+		cms_article.title,cms_article.id from cms_choose LEFT JOIN cms_article
+		on cms_choose.article_id=cms_article.id
+	</select>
+
+	<insert id="addChooseResult">
+		insert into cms_choose_result values
+		<foreach collection="list" separator="," item="a">
+			(null,#{a.userId},#{a.articleId},#{a.option})
+		</foreach>
+	</insert>
+
+	<select id="selectChooses" resultMap="articleResultMap">
+		select
+		cms_article.title,cms_article.picture,article_id,COUNT(article_id)*100/(select
+		count(*) from cms_choose_result) as count from cms_choose_result LEFT
+		JOIN cms_article on cms_choose_result.article_id=cms_article.id GROUP
+		BY article_id ORDER BY count desc
+
+
+	</select>
+
+
 </mapper>
 

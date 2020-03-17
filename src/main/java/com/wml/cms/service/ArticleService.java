@@ -3,6 +3,8 @@ package com.wml.cms.service;
 import java.util.List;
 
 import com.wml.cms.domain.Article;
+import com.wml.cms.domain.ArticleVO;
+import com.wml.cms.domain.ChooseResult;
 
 /** 
  * @author by WangMaoLin
@@ -19,4 +21,10 @@ public interface ArticleService {
 	Article select(Integer id);
 	//修改审核状态
 	int update(Article article);
+	//查询评选项
+	List<Article> selectChoose();
+	//添加导评选结果
+	Boolean addChooseResult(List<ChooseResult> list);
+	//查询结果
+	List<Article> selectChooses();
 }

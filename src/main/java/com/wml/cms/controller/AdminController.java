@@ -14,6 +14,7 @@ import com.github.pagehelper.PageInfo;
 import com.wml.cms.domain.Article;
 import com.wml.cms.domain.User;
 import com.wml.cms.service.ArticleService;
+import com.wml.cms.service.ChooseService;
 import com.wml.cms.service.UserService;
 
 /** 
@@ -28,6 +29,8 @@ public class AdminController {
 	private ArticleService articleService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private ChooseService chooseService;
 	/**
 	 * 
 	 * @Title: index 
@@ -120,5 +123,29 @@ public class AdminController {
 	public boolean updateUser(User user) {
 		
 		return userService.update(user) >0;
+	}
+	/**
+	 * 
+	 * @Title: choose 
+	 * @Description: 进入评选页面
+	 * @return
+	 * @return: String
+	 */
+	@RequestMapping("choose")
+	public String choose(){
+		return "admin/choose";
+	}
+	/**
+	 * 
+	 * @Title: choose 
+	 * @Description: 更新评选
+	 * @return
+	 * @return: String
+	 */
+	@ResponseBody
+	@RequestMapping("updateChoose")
+	public Boolean updateChoose(){
+		Boolean flag = chooseService.updateChoose();
+		return flag;
 	}
 }

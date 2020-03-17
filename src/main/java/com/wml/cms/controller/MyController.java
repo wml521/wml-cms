@@ -2,6 +2,7 @@ package com.wml.cms.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -21,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.wml.cms.domain.Article;
+import com.wml.cms.domain.ChooseResult;
 import com.wml.cms.domain.User;
 import com.wml.cms.service.ArticleService;
 
@@ -144,5 +146,48 @@ public class MyController {
 		article.setHot(0);// 默认非热门
 		article.setStatus(0);// 默认待审核
 		return articleService.insert(article) > 0;
+	}
+
+	/**
+	 * 
+	 * @Title: choose
+	 * @Description: 评选
+	 * @return
+	 * @return: String
+	 */
+	@RequestMapping("choose")
+	public String choose(Model m) {
+		List<Article> list = articleService.selectChoose();
+		m.addAttribute("list", list);
+		return "my/choose";
+	}
+	
+	/**
+	 * 
+	 * @Title: choose
+	 * @Description: 评选
+	 * @return
+	 * @return: String
+	 */
+	@ResponseBody
+	@RequestMapping("addChooseResult")
+	public Boolean addChooseResult(HttpSession session,String options,String articleIds) {
+		User user = (User) session.getAttribute("user");
+		
+		String[] os = options.split(",");
+		String[] as = articleIds.split(",");
+		List<ChooseResult> list = new ArrayList<ChooseResult>();
+		for (int i = 0; i < os.length; i++) {
+			ChooseResult chooseResult = new ChooseResult();
+			chooseResult.setUserId(user.getId());
+			chooseResult.setOption(os[i]);
+			chooseResult.setArticleId(Integer.parseInt(as[i]));
+			list.add(chooseResult);
+		}
+		for (ChooseResult chooseResult : list) {
+			System.out.println("验证！"+chooseResult);
+		}
+		Boolean flag = articleService.addChooseResult(list);
+		return flag;
 	}
 }

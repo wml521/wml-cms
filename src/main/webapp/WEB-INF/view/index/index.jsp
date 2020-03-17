@@ -186,6 +186,25 @@
 						</c:forEach>
 					</div>
 				</div>
+				
+				<div class="card" style="width: 18rem; margin-top: 6px">
+					<div class="card-header">评选展示</div>
+					<div class="card-body">
+						<!-- 最新文章 --10篇 -->
+						<c:forEach items="${lcArticles.list}" var="lcArticles">
+							<div class="media">
+								<img src="/pic/${lcArticles.picture}" class="mr-3 rounded"
+									alt="..." style="width: 60px; height: 60px">
+								<div class="media-body">
+									<p>
+										<a href="/articleDetail?id=${lcArticles.id }" target="_blank">${lcArticles.title }</a>
+									</p>
+								</div>
+							</div>
+							<hr>
+						</c:forEach>
+					</div>
+				</div>
 			</div>
 
 		</div>
